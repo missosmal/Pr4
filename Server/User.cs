@@ -12,7 +12,7 @@ namespace Server
         public string password { get; set; }
         public string src { get; set; }
         public string temp_src {  get; set; }
-        public User(string login, string password, string src, string temp_src)
+        public User(string login, string password, string src)
         {
             this.login = login;
             this.password = password;
