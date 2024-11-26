@@ -3,8 +3,31 @@
   "WorkspaceRootPath": "C:\\Users\\small\\Documents\\Pr40202\\Common\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|c:\\users\\small\\documents\\pr40202\\common\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{932300B0-2573-4F3F-A0D2-48DAB7338084}|..\\Server\\Server.csproj|c:\\users\\small\\documents\\pr40202\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Common||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{932300B0-2573-4F3F-A0D2-48DAB7338084}|..\\Server\\Server.csproj|c:\\users\\small\\documents\\pr40202\\server\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|C:\\Users\\small\\Documents\\Pr40202\\Common\\viewmodelsend.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|solutionrelative:viewmodelsend.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|C:\\Users\\small\\Documents\\Pr40202\\Common\\fileinfoftp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|solutionrelative:fileinfoftp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|C:\\Users\\small\\Documents\\Pr40202\\Common\\viewmodelmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|solutionrelative:viewmodelmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2ED3D3C-EA67-4E95-8A76-3E279DFE23B4}|..\\Client\\Client.csproj|c:\\users\\small\\documents\\pr40202\\client\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2ED3D3C-EA67-4E95-8A76-3E279DFE23B4}|..\\Client\\Client.csproj|c:\\users\\small\\documents\\pr40202\\client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +37,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 92,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,16 +45,98 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FileInfoFTP.cs",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Common\\FileInfoFTP.cs",
+              "RelativeDocumentMoniker": "FileInfoFTP.cs",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Common\\FileInfoFTP.cs",
+              "RelativeToolTip": "FileInfoFTP.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T17:37:39.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ViewModelSend.cs",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Common\\ViewModelSend.cs",
+              "RelativeDocumentMoniker": "ViewModelSend.cs",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Common\\ViewModelSend.cs",
+              "RelativeToolTip": "ViewModelSend.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T17:35:43.092Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Common\\Class1.cs",
-              "RelativeDocumentMoniker": "Class1.cs",
-              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Common\\Class1.cs",
-              "RelativeToolTip": "Class1.cs",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "..\\Server\\Program.cs",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Server\\Program.cs",
+              "RelativeToolTip": "..\\Server\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T17:27:00.396Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Server\\User.cs",
+              "RelativeDocumentMoniker": "..\\Server\\User.cs",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Server\\User.cs",
+              "RelativeToolTip": "..\\Server\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T17:39:05.779Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Common",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Common\\Common.csproj",
+              "RelativeDocumentMoniker": "Common.csproj",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Common\\Common.csproj",
+              "RelativeToolTip": "Common.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-26T17:25:35.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ViewModelMessage.cs",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Common\\ViewModelMessage.cs",
+              "RelativeDocumentMoniker": "ViewModelMessage.cs",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Common\\ViewModelMessage.cs",
+              "RelativeToolTip": "ViewModelMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T17:36:44.303Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "..\\Client\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml",
+              "RelativeToolTip": "..\\Client\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-26T17:27:39.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "..\\Client\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs",
+              "RelativeToolTip": "..\\Client\\MainWindow.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T17:25:28.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-26T17:27:39.502Z"
             }
           ]
         }
