@@ -1,25 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\small\\Documents\\Pr40202\\Common\\",
+  "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2ED3D3C-EA67-4E95-8A76-3E279DFE23B4}|..\\Client\\Client.csproj|c:\\users\\small\\documents\\pr40202\\client\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2ED3D3C-EA67-4E95-8A76-3E279DFE23B4}|..\\Client\\Client.csproj|c:\\users\\small\\documents\\pr40202\\client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{932300B0-2573-4F3F-A0D2-48DAB7338084}|..\\Server\\Server.csproj|c:\\users\\small\\documents\\pr40202\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Common||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|c:\\users\\small\\documents\\pr40202\\common\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|C:\\Users\\Admin\\Desktop\\Pr4\\Common\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|solutionrelative:class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|c:\\users\\small\\documents\\pr40202\\common\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\small\\Documents\\Pr40202\\Server\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,74 +26,93 @@
       "DocumentGroups": [
         {
           "DockedWidth": 92,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "..\\Client\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml",
               "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml",
-              "RelativeToolTip": "..\\Client\\MainWindow.xaml",
+              "RelativeToolTip": "..\\..\\..\\..\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-26T17:27:39.688Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "..\\Client\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs",
-              "RelativeToolTip": "..\\Client\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T17:27:39.502Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Server\\Program.cs",
-              "RelativeDocumentMoniker": "..\\Server\\Program.cs",
-              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Server\\Program.cs",
-              "RelativeToolTip": "..\\Server\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T17:27:00.396Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-26T17:27:39.688Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Common",
-              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Common\\Common.csproj",
-              "RelativeDocumentMoniker": "Common.csproj",
-              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Common\\Common.csproj",
-              "RelativeToolTip": "Common.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-26T17:25:35.337Z",
-              "EditorCaption": ""
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\small\\Documents\\Pr40202\\Client\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T17:27:39.502Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\small\\Documents\\Pr40202\\Server\\Program.cs",
+              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Server\\Program.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\small\\Documents\\Pr40202\\Server\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T17:27:00.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Common",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\Common.csproj",
+              "RelativeDocumentMoniker": "Common.csproj",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\Common.csproj",
+              "RelativeToolTip": "Common.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-26T17:25:35.337Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\small\\Documents\\Pr40202\\Common\\Class1.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\Class1.cs",
               "RelativeDocumentMoniker": "Class1.cs",
-              "ToolTip": "C:\\Users\\small\\Documents\\Pr40202\\Common\\Class1.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\Class1.cs",
               "RelativeToolTip": "Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T17:25:28.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-26T17:25:28.679Z"
             }
           ]
         }
