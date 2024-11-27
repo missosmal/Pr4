@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="FTP-Client" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBlock Text="IP: " Width="15" Margin="5"/>
+            <TextBox x:Name="txtIpAddress" Width="120" Margin="5" ToolTip="IP Address"/>
+            <TextBlock Text="Port: " Width="25" Margin="5"/>
+            <TextBox x:Name="txtPort" Width="60" Margin="5" ToolTip="Port"/>
+            <TextBlock Text="Login: " Width="35" Margin="5"/>
+            <TextBox x:Name="txtLogin" Width="145" Margin="5" ToolTip="Login"/>
+            <TextBlock Text="Password: " Width="55" Margin="5"/>
+            <TextBox x:Name="txtPassword" Width="145" Margin="5" ToolTip="Password"/>
+            <Button Content="Connect" Width="85" Margin="5" Click="BtnConnect_Click"/>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="lstDirectories" Margin="10" SelectionChanged="LstDirectories_SelectionChanged"/>
+            <ListBox x:Name="lstFiles" Margin="10" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </Window>

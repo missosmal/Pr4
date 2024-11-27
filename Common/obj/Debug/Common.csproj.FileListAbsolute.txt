@@ -1,0 +1,6 @@
+C:\Users\Admin\Desktop\Pr4\Common\bin\Debug\Common.dll
+C:\Users\Admin\Desktop\Pr4\Common\bin\Debug\Common.pdb
+C:\Users\Admin\Desktop\Pr4\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\Pr4\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\Pr4\Common\obj\Debug\Common.dll
+C:\Users\Admin\Desktop\Pr4\Common\obj\Debug\Common.pdb

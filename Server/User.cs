@@ -18,7 +18,7 @@ namespace Server
             this.password = password;
             this.src = src;
 
-            this.temp_src = temp_src;
+            this.temp_src = src;
         }
     }
 }

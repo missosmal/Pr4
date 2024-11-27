@@ -1,0 +1,12 @@
+C:\Users\Admin\Desktop\Pr4\Server\bin\Debug\Server.exe.config
+C:\Users\Admin\Desktop\Pr4\Server\bin\Debug\Server.exe
+C:\Users\Admin\Desktop\Pr4\Server\bin\Debug\Server.pdb
+C:\Users\Admin\Desktop\Pr4\Server\bin\Debug\Common.dll
+C:\Users\Admin\Desktop\Pr4\Server\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin\Desktop\Pr4\Server\bin\Debug\Common.pdb
+C:\Users\Admin\Desktop\Pr4\Server\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Admin\Desktop\Pr4\Server\obj\Debug\Server.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\Pr4\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\Pr4\Server\obj\Debug\Server.csproj.Up2Date
+C:\Users\Admin\Desktop\Pr4\Server\obj\Debug\Server.exe
+C:\Users\Admin\Desktop\Pr4\Server\obj\Debug\Server.pdb
