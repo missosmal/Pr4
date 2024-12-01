@@ -1,32 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{A2ED3D3C-EA67-4E95-8A76-3E279DFE23B4}|..\\Client\\Client.csproj|c:\\users\\admin\\desktop\\pr4\\client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{932300B0-2573-4F3F-A0D2-48DAB7338084}|..\\Server\\Server.csproj|c:\\users\\admin\\desktop\\pr4\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{932300B0-2573-4F3F-A0D2-48DAB7338084}|..\\Server\\Server.csproj|c:\\users\\admin\\desktop\\pr4\\server\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2ED3D3C-EA67-4E95-8A76-3E279DFE23B4}|..\\Client\\Client.csproj|c:\\users\\admin\\desktop\\pr4\\client\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|C:\\Users\\Admin\\Desktop\\Pr4\\Common\\viewmodelsend.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|solutionrelative:viewmodelsend.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|C:\\Users\\Admin\\Desktop\\Pr4\\Common\\viewmodelmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|solutionrelative:viewmodelmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|C:\\Users\\Admin\\Desktop\\Pr4\\Common\\fileinfoftp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CD6C3788-6FFC-44F6-8F02-8B097434C42C}|Common.csproj|solutionrelative:fileinfoftp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -34,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 92,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -63,91 +38,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Server\\User.cs",
-              "RelativeDocumentMoniker": "..\\Server\\User.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Server\\User.cs",
-              "RelativeToolTip": "..\\Server\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T19:45:59.704Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Server\\Program.cs",
-              "RelativeDocumentMoniker": "..\\Server\\Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Server\\Program.cs",
-              "RelativeToolTip": "..\\Server\\Program.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAADgvxIAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T19:45:39.574Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ViewModelSend.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\ViewModelSend.cs",
-              "RelativeDocumentMoniker": "ViewModelSend.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\ViewModelSend.cs",
-              "RelativeToolTip": "ViewModelSend.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T19:45:37.442Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ViewModelMessage.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\ViewModelMessage.cs",
-              "RelativeDocumentMoniker": "ViewModelMessage.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\ViewModelMessage.cs",
-              "RelativeToolTip": "ViewModelMessage.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T19:45:36.156Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "FileInfoFTP.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\FileInfoFTP.cs",
-              "RelativeDocumentMoniker": "FileInfoFTP.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Common\\FileInfoFTP.cs",
-              "RelativeToolTip": "FileInfoFTP.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T19:45:32.676Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Client\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "..\\Client\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Client\\MainWindow.xaml",
-              "RelativeToolTip": "..\\Client\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-26T19:31:58.883Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Client\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "..\\Client\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Client\\MainWindow.xaml.cs",
-              "RelativeToolTip": "..\\Client\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAEIAAAAAAAAAAAAowF4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T19:31:56.639Z",
-              "EditorCaption": ""
             }
           ]
         }

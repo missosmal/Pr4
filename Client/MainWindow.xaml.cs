@@ -1,21 +1,14 @@
 ﻿using Common;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Client
 {
@@ -24,149 +17,174 @@ namespace Client
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static IPAddress IpAdress;
-        private Socket _clientSocket;
-        public static int Port;
-        public static int Id = -1;
+        private IPAddress ipAddress;
+        private int port;
+        private int userId = -1;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public static bool CheckCommand(string message)
+        private void BtnConnect_Click(object sender, RoutedEventArgs e)
         {
-            bool BCommand = false;
-            string[] DataMessage = message.Split(new string[1] { " " }, StringSplitOptions.None);
-            if (DataMessage.Length > 0)
+            if (IPAddress.TryParse(txtIpAddress.Text, out ipAddress) && int.TryParse(txtPort.Text, out port))
             {
-                string Command = DataMessage[0];
-                if (Command == "connect")
+                string login = txtLogin.Text;
+                string password = txtPassword.Password;
+                if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(password))
                 {
-                    if (DataMessage.Length != 3)
+                    MessageBox.Show("Введите логин и пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                try
+                {
+                    var response = SendCommand($"connect {login} {password}");
+                    if (response?.Command == "autorization")
                     {
-                        MessageBox.Show($"Использование: connect [login] [password]\nПример: connect User1 Asdfg123");
-                        BCommand = false;
+                        userId = int.Parse(response.Data);
+                        MessageBox.Show("Подключение успешно!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        LoadDirectories();
                     }
                     else
                     {
-                        BCommand = true;
+                        MessageBox.Show(response?.Data ?? "Ошибка авторизации.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                else if (Command == "cd")
+                catch (Exception ex)
                 {
-                    BCommand = true;
-                }
-                else if (Command == "get")
-                {
-                    if (DataMessage.Length == 1)
-                    {
-                        MessageBox.Show($"Использование: get [NameFile]\nПример: get Test.txt");
-                        BCommand = false;
-                    }
-                    else BCommand = true;
-                }
-                else if (Command == "set")
-                {
-                    if (DataMessage.Length == 1)
-                    {
-                        MessageBox.Show("Использование: set [NameFile]\nПример: set Test.txt");
-                        BCommand = false;
-                    }
-                    else BCommand = true;
+                    MessageBox.Show($"Ошибка подключения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            return BCommand;
-        }
-
-        private void BtnConnect_Click(object sender, RoutedEventArgs e)
-        {
-            try
+            else
             {
-                string IPAdress = txtIpAddress.Text.ToString();
-                int port = int.Parse(txtPort.Text);
-                string login = txtLogin.Text.ToString();
-                string password = txtPassword.Text.ToString();
-
-                _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                _clientSocket.Connect(IPAdress, port);
-
-                string message = $"connect {login} {password}";
-                SendMessage(message);
-
-                string response = ReceiveMessage();
-                var viewModelMessage = JsonConvert.DeserializeObject<ViewModelMessage>(response);
-
-                if (viewModelMessage.Command == "autorization")
-                {
-                    Id = int.Parse(viewModelMessage.Data);
-                    MessageBox.Show("Connected successfully!");
-                    LoadDirectories();
-                }
-                else
-                {
-                    MessageBox.Show("Invalid login or password.");
-                }
+                MessageBox.Show("Введите корректный IP и порт.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            catch (Exception ex) 
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
-        }
-
-        private void SendMessage(string message)
-        {
-            var viewModelSend = new ViewModelSend(message, Id);
-            string jsonMessage = JsonConvert.SerializeObject(viewModelSend);
-            byte[] messageBytes = Encoding.UTF8.GetBytes(jsonMessage);
-            _clientSocket.Send(messageBytes);
-        }
-
-        private string ReceiveMessage()
-        {
-            byte[] buffer = new byte[10485760];
-            int bytesReceived = _clientSocket.Receive(buffer);
-            return Encoding.UTF8.GetString(buffer, 0, bytesReceived);
         }
 
         private void LoadDirectories()
         {
-            string message = $"cd";
-            SendMessage(message);
-
-            string response = ReceiveMessage();
-            var viewModelMessage = JsonConvert.DeserializeObject<ViewModelMessage>(response);
-
-            if (viewModelMessage.Command == "cd")
+            var response = SendCommand("cd");
+            if (response?.Command == "cd")
             {
-                var directories = JsonConvert.DeserializeObject<List<string>>(viewModelMessage.Data);
-                lstDirectories.ItemsSource = directories;
+                var directories = JsonConvert.DeserializeObject<string[]>(response.Data);
+                lstDirectories.Items.Clear();
+                lstFiles.Items.Clear();
+
+                foreach (var dir in directories)
+                {
+                    lstDirectories.Items.Add(dir);
+                }
             }
             else
             {
-                MessageBox.Show(viewModelMessage.Data);
+                MessageBox.Show("Не удалось загрузить список директорий.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        private void LstDirectories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private ViewModelMessage SendCommand(string message)
         {
-            if (lstDirectories.SelectedItem != null)
+            try
             {
-                string selectedDirectory = lstDirectories.SelectedItem.ToString();
-                string message = $"cd {selectedDirectory}";
-                SendMessage(message);
-
-                string response = ReceiveMessage();
-                var viewModelMessage = JsonConvert.DeserializeObject<ViewModelMessage>(response);
-
-                if (viewModelMessage.Command == "cd")
+                IPEndPoint endPoint = new IPEndPoint(ipAddress, port);
+                using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
                 {
-                    var files = JsonConvert.DeserializeObject<List<string>>(viewModelMessage.Data);
-                    lstFiles.ItemsSource = files;
+                    socket.Connect(endPoint);
+                    if (socket.Connected)
+                    {
+                        var request = new ViewModelSend(message, userId);
+                        byte[] requestBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(request));
+                        socket.Send(requestBytes);
+
+                        byte[] responseBytes = new byte[10485760];
+                        int receivedBytes = socket.Receive(responseBytes);
+                        string responseData = Encoding.UTF8.GetString(responseBytes, 0, receivedBytes);
+
+                        return JsonConvert.DeserializeObject<ViewModelMessage>(responseData);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка соединения: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return null;
+        }
+
+        private void lstDirectories_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (lstDirectories.SelectedItem == null)
+                return;
+
+            string selectedItem = lstDirectories.SelectedItem.ToString();
+            if (selectedItem.EndsWith("/"))
+            {
+                var response = SendCommand($"cd {selectedItem}");
+                if (response?.Command == "cd")
+                {
+                    var items = JsonConvert.DeserializeObject<List<string>>(response.Data);
+                    foreach (var item in items)
+                    {
+                        lstFiles.Items.Add(item);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(viewModelMessage.Data);
+                    MessageBox.Show($"Ошибка открытия директории: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+            else
+            {
+                var response = SendCommand($"get {selectedItem}");
+                if (response?.Command == "file")
+                {
+                    try
+                    {
+                        byte[] fileData = JsonConvert.DeserializeObject<byte[]>(response.Data);
+                        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), selectedItem);
+                        File.WriteAllBytes(filePath, fileData);
+                        MessageBox.Show($"Файл {selectedItem} успешно загружен на рабочий стол.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка скачивания файла: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void lstFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (lstFiles.SelectedItem != null)
+            {
+                string selectedFile = lstFiles.SelectedItem.ToString();
+                GetFile(selectedFile);
+            }
+        }
+
+        private void GetFile(string fileName)
+        {
+            var response = SendCommand($"get \\{fileName}");
+            if (response?.Command == "file")
+            {
+                try
+                {
+                    byte[] fileData = JsonConvert.DeserializeObject<byte[]>(response.Data);
+                    string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+                    File.WriteAllBytes(filePath, fileData);
+                    MessageBox.Show($"Файл {fileName} успешно загружен на рабочий стол.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Ошибка скачивания файла: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

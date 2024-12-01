@@ -13,22 +13,24 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="10">
             <TextBlock Text="IP: " Width="15" Margin="5"/>
-            <TextBox x:Name="txtIpAddress" Width="120" Margin="5" ToolTip="IP Address"/>
+            <TextBox x:Name="txtIpAddress" Text="127.0.0.1" Width="120" Margin="5" ToolTip="IP Address"/>
             <TextBlock Text="Port: " Width="25" Margin="5"/>
-            <TextBox x:Name="txtPort" Width="60" Margin="5" ToolTip="Port"/>
+            <TextBox x:Name="txtPort" Text="5000" Width="60" Margin="5" ToolTip="Port"/>
             <TextBlock Text="Login: " Width="35" Margin="5"/>
             <TextBox x:Name="txtLogin" Width="145" Margin="5" ToolTip="Login"/>
             <TextBlock Text="Password: " Width="55" Margin="5"/>
-            <TextBox x:Name="txtPassword" Width="145" Margin="5" ToolTip="Password"/>
-            <Button Content="Connect" Width="85" Margin="5" Click="BtnConnect_Click"/>
+            <PasswordBox x:Name="txtPassword" Width="145" Margin="5" ToolTip="Password"/>
+            <Button Content="Connect" Width="80" Margin="5" Click="BtnConnect_Click"/>
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListBox x:Name="lstDirectories" Margin="10" SelectionChanged="LstDirectories_SelectionChanged"/>
-            <ListBox x:Name="lstFiles" Margin="10" Grid.Column="1"/>
+            <Label Content="Содержимое директории: " HorizontalAlignment="Center" Grid.Column="0" VerticalAlignment="Top" Margin="10" FontSize="16"/>
+            <Label Content="Файлы директории: " HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Margin="10" FontSize="16"/>
+            <ListBox x:Name="lstDirectories" Margin="10,50,10,10" MouseDoubleClick="lstDirectories_MouseDoubleClick"/>
+            <ListBox x:Name="lstFiles" Margin="10,50,10,10" Grid.Column="1" MouseDoubleClick="lstFiles_MouseDoubleClick"/>
         </Grid>
     </Grid>
 </Window>
