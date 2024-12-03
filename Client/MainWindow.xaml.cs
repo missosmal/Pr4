@@ -1,5 +1,4 @@
 ﻿using Common;
-using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,7 @@ namespace Client
         private IPAddress ipAddress;
         private int port;
         private int userId = -1;
+        private Stack<string> directoryStack = new Stack<string>();
 
         public MainWindow()
         {
@@ -71,6 +71,11 @@ namespace Client
                 lstDirectories.Items.Clear();
                 lstFiles.Items.Clear();
 
+                if (directoryStack.Count > 0)
+                {
+                    lstDirectories.Items.Add("Назад");
+                }
+
                 foreach (var dir in directories)
                 {
                     lstDirectories.Items.Add(dir);
@@ -116,12 +121,25 @@ namespace Client
                 return;
 
             string selectedItem = lstDirectories.SelectedItem.ToString();
-            if (selectedItem.EndsWith("/"))
+            if (selectedItem == "Назад")
             {
+                if (directoryStack.Count > 0)
+                {
+                    directoryStack.Pop();
+                    LoadDirectories();
+                }
+            }
+            else if (selectedItem.EndsWith("/"))
+            {
+                directoryStack.Push(selectedItem);
                 var response = SendCommand($"cd {selectedItem}");
                 if (response?.Command == "cd")
                 {
                     var items = JsonConvert.DeserializeObject<List<string>>(response.Data);
+                    if (directoryStack.Count > 0)
+                    {
+                        lstFiles.Items.Add("Назад");
+                    }
                     foreach (var item in items)
                     {
                         lstFiles.Items.Add(item);
@@ -134,26 +152,30 @@ namespace Client
             }
             else
             {
-                var response = SendCommand($"get {selectedItem}");
-                if (response?.Command == "file")
-                {
-                    try
-                    {
-                        byte[] fileData = JsonConvert.DeserializeObject<byte[]>(response.Data);
-                        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), selectedItem);
-                        File.WriteAllBytes(filePath, fileData);
-                        MessageBox.Show($"Файл {selectedItem} успешно загружен на рабочий стол.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show($"Ошибка скачивания файла: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                GetFile(selectedItem);
             }
+            //else
+            //{
+            //    var response = SendCommand($"get {selectedItem}");
+            //    if (response?.Command == "file")
+            //    {
+            //        try
+            //        {
+            //            byte[] fileData = JsonConvert.DeserializeObject<byte[]>(response.Data);
+            //            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), selectedItem);
+            //            File.WriteAllBytes(filePath, fileData);
+            //            MessageBox.Show($"Файл {selectedItem} успешно загружен на рабочий стол.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show($"Ошибка скачивания файла: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //}
         }
 
         private void lstFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -161,8 +183,42 @@ namespace Client
             if (lstFiles.SelectedItem != null)
             {
                 string selectedFile = lstFiles.SelectedItem.ToString();
-                GetFile(selectedFile);
+                if (selectedFile == "Назад")
+                {
+                    if (directoryStack.Count > 0)
+                    {
+                        directoryStack.Pop();
+                        LoadDirectories();
+                    }
+                }
+                else if (selectedFile.EndsWith("/"))
+                {
+                    directoryStack.Push(selectedFile);
+                    var response = SendCommand($"cd {selectedFile}");
+                    if (response?.Command == "cd")
+                    {
+                        var items = JsonConvert.DeserializeObject<List<string>>(response.Data);
+                        lstFiles.Items.Clear();
+                        if (directoryStack.Count > 0)
+                        {
+                            lstFiles.Items.Add("Назад");
+                        }
+                        foreach (var item in items)
+                        {
+                            lstFiles.Items.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Ошибка открытия директории: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    GetFile(selectedFile);
+                }
             }
+
         }
 
         private void GetFile(string fileName)
