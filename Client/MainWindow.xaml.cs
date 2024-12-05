@@ -74,7 +74,6 @@ namespace Client
                 {
                     var directories = JsonConvert.DeserializeObject<string[]>(response.Data);
                     lstDirectories.Items.Clear();
-                    lstFiles.Items.Clear();
 
                     if (directoryStack.Count > 0)
                     {
@@ -89,17 +88,6 @@ namespace Client
                 else
                 {
                     MessageBox.Show("Не удалось загрузить список директорий.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                string serverBasePath = "C:\\Users\\Admin\\Desktop\\Server";
-                if (Directory.Exists(serverBasePath))
-                {
-                    string[] files = Directory.GetFiles(serverBasePath);
-                    lstFiles.Items.Clear();
-                    foreach (string file in files)
-                    {
-                        string fileName = Path.GetFileName(file);
-                        lstFiles.Items.Add(fileName);
-                    }
                 }
             }
             catch (Exception ex)
@@ -182,65 +170,36 @@ namespace Client
         {
             try
             {
-                if (userId == -1)
+                string localSavePath = GetUniqueFilePath(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), Path.GetFileName(fileName));
+                Console.WriteLine($"Trying to download file from server: {fileName}");
+                var socket = Connecting(ipAddress, port);
+                if (socket == null)
                 {
-                    MessageBox.Show("Пожалуйста, авторизуйтесь.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Не удалось подключиться к серверу.");
                     return;
                 }
-                var response = SendCommand($"get {fileName}");
-                if (response?.Command == "file")
+                string command = $"get {fileName}";
+                ViewModelSend viewModelSend = new ViewModelSend(command, userId);
+                byte[] messageBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(viewModelSend));
+                socket.Send(messageBytes);
+                byte[] buffer = new byte[10485760];
+                int bytesReceived = socket.Receive(buffer);
+                string serverResponse = Encoding.UTF8.GetString(buffer, 0, bytesReceived);
+                ViewModelMessage responseMessage = JsonConvert.DeserializeObject<ViewModelMessage>(serverResponse);
+                socket.Close();
+                if (responseMessage.Command == "file")
                 {
-                    byte[] fileData = JsonConvert.DeserializeObject<byte[]>(response.Data);
-                    File.WriteAllBytes("C:\\Users\\Admin\\Desktop\\Server", fileData);
-                    MessageBox.Show($"Файл \"{fileName}\" успешно сохранён в C:\\Users\\Admin\\Desktop\\Server.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    byte[] fileData = JsonConvert.DeserializeObject<byte[]>(responseMessage.Data);
+                    File.WriteAllBytes(localSavePath, fileData);
+                    MessageBox.Show($"Файл скачан и сохранён в: {localSavePath}");
                 }
-                else
-                {
-                    MessageBox.Show($"Ошибка загрузки файла: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                else MessageBox.Show("Не удалось получить файл. Проверьте путь на сервере.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message);
             }
         }
-
-        private void lstFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (lstFiles.SelectedItem != null)
-            {
-                string selectedFile = lstFiles.SelectedItem.ToString();
-                if (selectedFile == "Назад")
-                {
-                    if (directoryStack.Count > 0)
-                    {
-                        directoryStack.Pop();
-                        LoadDirectories();
-                    }
-                }
-                directoryStack.Push(selectedFile);
-                var response = SendCommand($"cd {selectedFile}");
-                if (response?.Command == "cd")
-                {
-                    var items = JsonConvert.DeserializeObject<List<string>>(response.Data);
-                    lstFiles.Items.Clear();
-                    if (directoryStack.Count > 0)
-                    {
-                        lstFiles.Items.Add("Назад");
-                    }
-                    foreach (var item in items)
-                    {
-                        lstFiles.Items.Add(item);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show($"Ошибка открытия директории: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-
-        }
-
         public Socket Connecting(IPAddress ipAddress, int port)
         {
             IPEndPoint endPoint = new IPEndPoint(ipAddress, port);
@@ -267,27 +226,39 @@ namespace Client
             }
             return null;
         }
-
-        private void UploadFile_Click(object sender, RoutedEventArgs e)
+        private string GetUniqueFilePath(string directory, string fileName)
         {
-            if (lstFiles.SelectedItem == null) return;
+            string uniqueFilePath = Path.Combine(directory, fileName);
+            return uniqueFilePath;
+        }
 
-            string selectedFile = lstFiles.SelectedItem.ToString();
-            string localDirectory = "C:\\Users\\Admin\\Desktop\\Server";
-            string filePath = Path.Combine(localDirectory, selectedFile);
-            if (!File.Exists(filePath))
-            {
-                MessageBox.Show($"Файл {selectedFile} не найден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
+        public void SendFileToServer(string filePath)
+        {
             try
             {
+                var socket = Connecting(ipAddress, port);
+                if (socket == null)
+                {
+                    MessageBox.Show("Не удалось подключиться к серверу.");
+                    return;
+                }
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Указанный файл не существует.");
+                    return;
+                }
                 FileInfo fileInfo = new FileInfo(filePath);
                 FileInfoFTP fileInfoFTP = new FileInfoFTP(File.ReadAllBytes(filePath), fileInfo.Name);
-                string message = JsonConvert.SerializeObject(fileInfoFTP);
-                var responseMessage = SendCommand(message);
-                if (responseMessage != null && responseMessage.Command == "message")
+                ViewModelSend viewModelSend = new ViewModelSend(JsonConvert.SerializeObject(fileInfoFTP), userId);
+                byte[] messageByte = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(viewModelSend));
+                socket.Send(messageByte);
+                byte[] buffer = new byte[10485760];
+                int bytesReceived = socket.Receive(buffer);
+                string serverResponse = Encoding.UTF8.GetString(buffer, 0, bytesReceived);
+                ViewModelMessage responseMessage = JsonConvert.DeserializeObject<ViewModelMessage>(serverResponse);
+                socket.Close();
+                LoadDirectories();
+                if (responseMessage.Command == "message")
                 {
                     MessageBox.Show(responseMessage.Data);
                 }
@@ -295,11 +266,21 @@ namespace Client
                 {
                     MessageBox.Show("Неизвестный ответ от сервера.");
                 }
-                LoadDirectories();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при чтении файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Download(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+                SendFileToServer(filePath);
             }
         }
     }
