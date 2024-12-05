@@ -6,6 +6,9 @@
       "AbsoluteMoniker": "D:0:0:{A2ED3D3C-EA67-4E95-8A76-3E279DFE23B4}|..\\Client\\Client.csproj|c:\\users\\admin\\desktop\\pr4\\client\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{932300B0-2573-4F3F-A0D2-48DAB7338084}|..\\Server\\Server.csproj|c:\\users\\admin\\desktop\\pr4\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2ED3D3C-EA67-4E95-8A76-3E279DFE23B4}|..\\Client\\Client.csproj|c:\\users\\admin\\desktop\\pr4\\client\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -16,7 +19,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 92,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,6 +52,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Server\\Program.cs",
+              "RelativeDocumentMoniker": "..\\Server\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Server\\Program.cs",
+              "RelativeToolTip": "..\\Server\\Program.cs",
+              "ViewState": "AQIAANQAAAAAAAAAAAA0wPgAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T06:50:57.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Pr4\\Client\\MainWindow.xaml",
               "RelativeDocumentMoniker": "..\\Client\\MainWindow.xaml",
@@ -66,7 +82,7 @@
               "RelativeDocumentMoniker": "..\\Client\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\Admin\\Desktop\\Pr4\\Client\\MainWindow.xaml.cs",
               "RelativeToolTip": "..\\Client\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAANAAAA",
+              "ViewState": "AQIAAA8BAAAAAAAAAAAYwFwAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-03T18:51:34.337Z",
               "EditorCaption": ""

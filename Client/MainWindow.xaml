@@ -27,10 +27,16 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Содержимое директории: " HorizontalAlignment="Center" Grid.Column="0" VerticalAlignment="Top" Margin="10" FontSize="16"/>
-            <Label Content="Файлы директории: " HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Margin="10" FontSize="16"/>
+            <Label Content="Директория клиента: " HorizontalAlignment="Center" Grid.Column="0" VerticalAlignment="Top" Margin="10" FontSize="16"/>
+            <Label Content="Директория сервера: " HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Margin="10" FontSize="16"/>
             <ListBox x:Name="lstDirectories" Margin="10,50,10,10" MouseDoubleClick="lstDirectories_MouseDoubleClick"/>
-            <ListBox x:Name="lstFiles" Margin="10,50,10,10" Grid.Column="1" MouseDoubleClick="lstFiles_MouseDoubleClick"/>
+            <ListBox x:Name="lstFiles" Margin="10,50,10,10" Grid.Column="1" MouseDoubleClick="lstFiles_MouseDoubleClick">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Скачать с сервера" Click="UploadFile_Click" />
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>

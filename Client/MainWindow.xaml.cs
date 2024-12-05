@@ -1,7 +1,10 @@
 ﻿using Common;
+using Microsoft.Win32;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Bcpg;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -64,28 +67,47 @@ namespace Client
 
         private void LoadDirectories()
         {
-            var response = SendCommand("cd");
-            if (response?.Command == "cd")
+            try
             {
-                var directories = JsonConvert.DeserializeObject<string[]>(response.Data);
-                lstDirectories.Items.Clear();
-                lstFiles.Items.Clear();
-
-                if (directoryStack.Count > 0)
+                var response = SendCommand("cd");
+                if (response?.Command == "cd")
                 {
-                    lstDirectories.Items.Add("Назад");
+                    var directories = JsonConvert.DeserializeObject<string[]>(response.Data);
+                    lstDirectories.Items.Clear();
+                    lstFiles.Items.Clear();
+
+                    if (directoryStack.Count > 0)
+                    {
+                        lstDirectories.Items.Add("Назад");
+                    }
+
+                    foreach (var dir in directories)
+                    {
+                        lstDirectories.Items.Add(dir);
+                    }
                 }
-
-                foreach (var dir in directories)
+                else
                 {
-                    lstDirectories.Items.Add(dir);
+                    MessageBox.Show("Не удалось загрузить список директорий.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                string serverBasePath = "C:\\Users\\Admin\\Desktop\\Server";
+                if (Directory.Exists(serverBasePath))
+                {
+                    string[] files = Directory.GetFiles(serverBasePath);
+                    lstFiles.Items.Clear();
+                    foreach (string file in files)
+                    {
+                        string fileName = Path.GetFileName(file);
+                        lstFiles.Items.Add(fileName);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Не удалось загрузить список директорий.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка загрузки: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private ViewModelMessage SendCommand(string message)
         {
             try
@@ -121,6 +143,7 @@ namespace Client
                 return;
 
             string selectedItem = lstDirectories.SelectedItem.ToString();
+
             if (selectedItem == "Назад")
             {
                 if (directoryStack.Count > 0)
@@ -129,20 +152,19 @@ namespace Client
                     LoadDirectories();
                 }
             }
-            else if (selectedItem.EndsWith("/"))
+            if (selectedItem.EndsWith("\\"))
             {
                 directoryStack.Push(selectedItem);
-                var response = SendCommand($"cd {selectedItem}");
+                var response = SendCommand($"cd {selectedItem.TrimEnd('/')}");
+
                 if (response?.Command == "cd")
                 {
                     var items = JsonConvert.DeserializeObject<List<string>>(response.Data);
-                    if (directoryStack.Count > 0)
-                    {
-                        lstFiles.Items.Add("Назад");
-                    }
+                    lstDirectories.Items.Clear();
+                    lstDirectories.Items.Add("Назад");
                     foreach (var item in items)
                     {
-                        lstFiles.Items.Add(item);
+                        lstDirectories.Items.Add(item);
                     }
                 }
                 else
@@ -152,30 +174,35 @@ namespace Client
             }
             else
             {
-                GetFile(selectedItem);
+                DownloadFile(selectedItem);
             }
-            //else
-            //{
-            //    var response = SendCommand($"get {selectedItem}");
-            //    if (response?.Command == "file")
-            //    {
-            //        try
-            //        {
-            //            byte[] fileData = JsonConvert.DeserializeObject<byte[]>(response.Data);
-            //            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), selectedItem);
-            //            File.WriteAllBytes(filePath, fileData);
-            //            MessageBox.Show($"Файл {selectedItem} успешно загружен на рабочий стол.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show($"Ошибка скачивания файла: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //}
+        }
+
+        private void DownloadFile(string fileName)
+        {
+            try
+            {
+                if (userId == -1)
+                {
+                    MessageBox.Show("Пожалуйста, авторизуйтесь.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                var response = SendCommand($"get {fileName}");
+                if (response?.Command == "file")
+                {
+                    byte[] fileData = JsonConvert.DeserializeObject<byte[]>(response.Data);
+                    File.WriteAllBytes("C:\\Users\\Admin\\Desktop\\Server", fileData);
+                    MessageBox.Show($"Файл \"{fileName}\" успешно сохранён в C:\\Users\\Admin\\Desktop\\Server.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка загрузки файла: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void lstFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -191,56 +218,88 @@ namespace Client
                         LoadDirectories();
                     }
                 }
-                else if (selectedFile.EndsWith("/"))
+                directoryStack.Push(selectedFile);
+                var response = SendCommand($"cd {selectedFile}");
+                if (response?.Command == "cd")
                 {
-                    directoryStack.Push(selectedFile);
-                    var response = SendCommand($"cd {selectedFile}");
-                    if (response?.Command == "cd")
+                    var items = JsonConvert.DeserializeObject<List<string>>(response.Data);
+                    lstFiles.Items.Clear();
+                    if (directoryStack.Count > 0)
                     {
-                        var items = JsonConvert.DeserializeObject<List<string>>(response.Data);
-                        lstFiles.Items.Clear();
-                        if (directoryStack.Count > 0)
-                        {
-                            lstFiles.Items.Add("Назад");
-                        }
-                        foreach (var item in items)
-                        {
-                            lstFiles.Items.Add(item);
-                        }
+                        lstFiles.Items.Add("Назад");
                     }
-                    else
+                    foreach (var item in items)
                     {
-                        MessageBox.Show($"Ошибка открытия директории: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        lstFiles.Items.Add(item);
                     }
                 }
                 else
                 {
-                    GetFile(selectedFile);
+                    MessageBox.Show($"Ошибка открытия директории: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
         }
 
-        private void GetFile(string fileName)
+        public Socket Connecting(IPAddress ipAddress, int port)
         {
-            var response = SendCommand($"get \\{fileName}");
-            if (response?.Command == "file")
+            IPEndPoint endPoint = new IPEndPoint(ipAddress, port);
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            try
             {
-                try
+                socket.Connect(endPoint);
+                return socket;
+            }
+            catch (SocketException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (socket != null && !socket.Connected)
                 {
-                    byte[] fileData = JsonConvert.DeserializeObject<byte[]>(response.Data);
-                    string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
-                    File.WriteAllBytes(filePath, fileData);
-                    MessageBox.Show($"Файл {fileName} успешно загружен на рабочий стол.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    socket.Close();
                 }
             }
-            else
+            return null;
+        }
+
+        private void UploadFile_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstFiles.SelectedItem == null) return;
+
+            string selectedFile = lstFiles.SelectedItem.ToString();
+            string localDirectory = "C:\\Users\\Admin\\Desktop\\Server";
+            string filePath = Path.Combine(localDirectory, selectedFile);
+            if (!File.Exists(filePath))
             {
-                MessageBox.Show($"Ошибка скачивания файла: {response?.Data}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Файл {selectedFile} не найден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                FileInfo fileInfo = new FileInfo(filePath);
+                FileInfoFTP fileInfoFTP = new FileInfoFTP(File.ReadAllBytes(filePath), fileInfo.Name);
+                string message = JsonConvert.SerializeObject(fileInfoFTP);
+                var responseMessage = SendCommand(message);
+                if (responseMessage != null && responseMessage.Command == "message")
+                {
+                    MessageBox.Show(responseMessage.Data);
+                }
+                else
+                {
+                    MessageBox.Show("Неизвестный ответ от сервера.");
+                }
+                LoadDirectories();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при чтении файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
